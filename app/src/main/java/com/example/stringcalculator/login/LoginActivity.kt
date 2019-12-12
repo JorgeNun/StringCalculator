@@ -1,14 +1,16 @@
-package com.example.stringcalculator
+package com.example.stringcalculator.login
 
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.stringcalculator.login.KataService
+import com.example.stringcalculator.R
 import kotlinx.android.synthetic.main.activity_login.*
 
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), LoginPresenterView {
+
+    private val presenter = LoginPresenter(KataService(), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,15 +20,18 @@ class LoginActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val userName = username.text.toString()
-        val pass = password.text.toString()
-
         loginButton.setOnClickListener {
-            if (KataService().logIn(userName, pass)) {
-                startActivity(Intent(this, LogOutActivity::class.java))
-            } else {
-                AlertDialog.Builder(this).setTitle("Error").setMessage("Invalid Credentials!!!").show()
-            }
+            val userName = username.text.toString()
+            val pass = password.text.toString()
+            presenter.onLoginButtonClicked(userName, pass)
         }
+    }
+
+    override fun goToLogOutScreen() {
+        startActivity(Intent(this, LogOutActivity::class.java))
+    }
+
+    override fun showError(error: String) {
+        AlertDialog.Builder(this).setTitle("Error").setMessage(error).show()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.stringcalculator
+package com.example.stringcalculator.calculator
 
 object Calculator {
 

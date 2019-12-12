@@ -1,10 +1,10 @@
 package com.example.stringcalculator
 
+import com.example.stringcalculator.calculator.Calculator
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import java.lang.NumberFormatException
 
 
 @RunWith(Parameterized::class)

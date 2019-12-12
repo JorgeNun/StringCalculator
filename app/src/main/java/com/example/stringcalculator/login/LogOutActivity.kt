@@ -1,12 +1,13 @@
-package com.example.stringcalculator
+package com.example.stringcalculator.login
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.stringcalculator.login.KataService
-import com.example.stringcalculator.login.TimeProvider
+import com.example.stringcalculator.R
 import kotlinx.android.synthetic.main.activity_logout.*
 
-class LogOutActivity : AppCompatActivity() {
+class LogOutActivity : AppCompatActivity(), LogOutPresenterView {
+
+    private val presenter = LogOutPresenter(KataService(), TimeProvider(), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,10 +17,12 @@ class LogOutActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         logoutButton.setOnClickListener {
-            if (KataService().logOut(TimeProvider())) {
-                finish()
-            }
+            presenter.onLogOutButtonClicked()
         }
+    }
+
+    override fun goToLoginScreen() {
+        finish()
     }
 
     override fun onBackPressed() {

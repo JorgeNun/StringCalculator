@@ -1,8 +1,10 @@
 package com.example.stringcalculator
 
+import com.example.stringcalculator.calculator.Calculator
+import com.example.stringcalculator.calculator.InputNotSupportedException
+import com.example.stringcalculator.calculator.NegativeNumberException
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.lang.NumberFormatException
 
 /**
  * Example local unit test, which will execute on the development machine (host).
